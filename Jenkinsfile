@@ -35,6 +35,22 @@ pipeline{
 		])
 	    }
 	}
+        stage("Package") {
+            steps {
+                sh "./gradlew build"
+            }
+        }
+
+	stage("Docker build") {
+     	    steps {
+                sh "docker build -t 10.0.2.7:5000/calculator ."
+            }
+        }
+        stage("Docker push") {
+            steps {
+                sh "docker push 10.0.2.7:5000/calculator"
+            }
+        }
     }
 }
 //this is an example comment
