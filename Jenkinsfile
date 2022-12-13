@@ -38,7 +38,10 @@ pipeline {
             emailext to: "tamer@robolaunch.cloud",
             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
             body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-            attachmentsPattern: '*.html'
+            attachmentsPattern: '*.html',
+            slackSend channel: '#dragons-team',
+            color: 'danger',
+            message: "The pipeline ${currentBuild.fullDisplayName} is successful."
         }
     }
 }
