@@ -35,10 +35,10 @@ pipeline {
     }
     post {
         always {
-            emailext attachLog: true, attachmentsPattern: 'index.html, main.html',
-            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            emailext to: "tamer@robolaunch.cloud",
             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
-            to: 'tamer@robolaunch.cloud'
+            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            attachmentsPattern: '*.html'
         }
     }
 }
