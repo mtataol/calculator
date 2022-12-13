@@ -35,10 +35,12 @@ pipeline {
     }
     post {
         always {
+            emailext attachLog: true, attachmentsPattern: 'index.html, main.html',
+            body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+            recipientProviders: [developers(), requestor()],
+            subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
             mail to: 'tamer@robolaunch.cloud',
-            subject: "Completed Pipeline: ${currentBuild.fullDisplayName}",
-            body: "Your build completed, please check: ${env.BUILD_URL}",
-            emailext attachLog: true, attachmentsPattern:: 'index.html, main.html'
+            attachLog: true, attachmentsPattern: 'index.html, main.html'
         }
     }
 }
