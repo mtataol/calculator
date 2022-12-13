@@ -40,7 +40,7 @@ pipeline {
             recipientProviders: [developers(), requestor()],
             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}",
             mail to: 'tamer@robolaunch.cloud',
-            attachLog: true, attachmentsPattern: 'index.html, main.html'
+            attachmentsPattern: 'index.html, main.html'
         }
     }
 }
