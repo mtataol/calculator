@@ -38,7 +38,7 @@ pipeline {
             mail to: 'tamer@robolaunch.cloud',
             subject: "Completed Pipeline: ${currentBuild.fullDisplayName}",
             body: "Your build completed, please check: ${env.BUILD_URL}",
-            attachments: 'index.html, main.html'
+            emailext attachLog: true, attachmentsPattern:: 'index.html, main.html'
         }
     }
 }
